@@ -19,7 +19,7 @@ class APIManager {
         // Create a url and kick off an asynchronous task
         let url = NSURL(string: urlString)!
         
-        let task = session.dataTaskWithURL(url) {  // does its work on a different queue from main - step 3
+        let task = session.dataTaskWithURL(url) {  // does its work on a different queue from main
             
             (data, response, error) -> () in  // get our 3 responses - data, response and error
             
@@ -37,6 +37,7 @@ class APIManager {
                      NSJSONSerialization requires the Do / Try / Catch.
                      Converts the NSDATA into a JSON object and casts it to a Dictionary. */
                     
+                    // step 3
                     if let json = try NSJSONSerialization.JSONObjectWithData(data!,
                                                             options: .AllowFragments)
                                                             as? JSONDictionary,

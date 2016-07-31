@@ -17,6 +17,7 @@
 		179F54321D4D521C0034670E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F54311D4D521C0034670E /* APIManager.swift */; };
 		179F54341D4E3B3C0034670E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F54331D4E3B3C0034670E /* Constants.swift */; };
 		179F54361D4E3BCE0034670E /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F54351D4E3BCE0034670E /* Movies.swift */; };
+		179F543A1D4E526F0034670E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 179F54391D4E526F0034670E /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,9 @@
 		179F54311D4D521C0034670E /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		179F54331D4E3B3C0034670E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		179F54351D4E3BCE0034670E /* Movies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
+		179F54371D4E526E0034670E /* Movies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Movies-Bridging-Header.h"; sourceTree = "<group>"; };
+		179F54381D4E526F0034670E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		179F54391D4E526F0034670E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +174,9 @@
 		179F542F1D4D4E240034670E /* Obj-C */ = {
 			isa = PBXGroup;
 			children = (
+				179F54381D4E526F0034670E /* Reachability.h */,
+				179F54391D4E526F0034670E /* Reachability.m */,
+				179F54371D4E526E0034670E /* Movies-Bridging-Header.h */,
 			);
 			name = "Obj-C";
 			sourceTree = "<group>";
@@ -317,6 +324,7 @@
 				179F54321D4D521C0034670E /* APIManager.swift in Sources */,
 				179F54001D4D4D6D0034670E /* ViewController.swift in Sources */,
 				179F53FE1D4D4D6D0034670E /* AppDelegate.swift in Sources */,
+				179F543A1D4E526F0034670E /* Reachability.m in Sources */,
 				179F54341D4E3B3C0034670E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,10 +469,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Movies/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitsmartz.Movies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Movies/Movies-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -472,10 +483,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Movies/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitsmartz.Movies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Movies/Movies-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -544,6 +557,7 @@
 				179F54241D4D4D6E0034670E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		179F54251D4D4D6E0034670E /* Build configuration list for PBXNativeTarget "MoviesTests" */ = {
 			isa = XCConfigurationList;
@@ -552,6 +566,7 @@
 				179F54271D4D4D6E0034670E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		179F54281D4D4D6E0034670E /* Build configuration list for PBXNativeTarget "MoviesUITests" */ = {
 			isa = XCConfigurationList;
@@ -560,6 +575,7 @@
 				179F542A1D4D4D6E0034670E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
