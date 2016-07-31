@@ -9,7 +9,7 @@
 import UIKit
 
 var reachability: Reachability?
-var reachabilityStatus = WIFI
+var reachabilityStatus = ""
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         internetCheck = Reachability.reachabilityForInternetConnection()
         internetCheck?.startNotifier()
+        statusChangedWithReachability(internetCheck!)
         
         return true
     }
