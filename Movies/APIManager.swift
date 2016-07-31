@@ -10,7 +10,7 @@ import Foundation
 
 class APIManager {
     
-    func loadData(urlString: String, completion: (result: String) -> ()) {  // result: String is input to another method
+    func loadData(urlString: String, completion: (movies: [Movies]) -> ()) {  // step 2 and step 7
         
         // Get a non-cached session
         let config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
@@ -26,9 +26,7 @@ class APIManager {
             // if error, move everything back to main queue - step 5
             if error != nil {
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    completion(result: (error!.localizedDescription))  // move error into result - step 6 alternate
-                }
+                print(error!.localizedDescription)
                     
             } else {
                 
@@ -39,22 +37,31 @@ class APIManager {
                      NSJSONSerialization requires the Do / Try / Catch.
                      Converts the NSDATA into a JSON object and casts it to a Dictionary. */
                     
-                    if let json = try NSJSONSerialization.JSONObjectWithData(data!,  // step 6 alternate
+                    if let json = try NSJSONSerialization.JSONObjectWithData(data!,
                                                             options: .AllowFragments)
-                                                            as? [String: AnyObject] {
-                        print(json)  // step 7
+                                                            as? JSONDictionary,
+                                                            feed = json["feed"] as? JSONDictionary,
+                                                            entries = feed["entry"] as? JSONArray {
+                        var movies = [Movies]()
+                        for entry in entries {
+                            let entry = Movies(data: entry as! JSONDictionary)
+                            movies.append(entry)
+                        }
                         
-                        let priority = DISPATCH_QUEUE_PRIORITY_HIGH
+                        
+                        let i = movies.count
+                        print("iTunesApiManager - total count --> \(i)")  // step 5
+                        print(" ")
+                        
+                        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT  // step 6
                         dispatch_async(dispatch_get_global_queue(priority, 0)) {
                             dispatch_async(dispatch_get_main_queue()) {
-                                completion(result: "JSONSerialization Successful")  // step 8
+                                completion(movies: movies)
                             }
                         }
                     }
                 } catch {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        completion(result: "error in NSJSONSerialization")
-                    }
+                     print("error in NSJSONSerialization")
                 }
                 // End of JSONSerialization
             }

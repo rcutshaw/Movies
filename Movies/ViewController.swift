@@ -10,26 +10,46 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var movies = [Movies]()  // created this array to hold all our fetched movies
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let api = APIManager()
+        
+        //        api.loadData("https://itunes.apple.com/us/rss/topmovies/limit=10/genre=4401/json") {
+        //            (result:String) in
+        //            print(result)
+        //        }
+
         api.loadData("https://itunes.apple.com/us/rss/topmovies/limit=10/genre=4401/json",  // step 1
             completion: didLoadData)  // when done, executes didLoadData  // step 2
     }
 
-    func didLoadData(result:String) {  // result from APIManager method is now the input to didLoadData
+    func didLoadData(movies: [Movies]) {  // result from APIManager method is now the input to didLoadData - step 8
         
-        print(result)  // step 9
+        self.movies = movies  // stored in class instance
         
-        let alert = UIAlertController(title: (result), message: nil, preferredStyle: .Alert)
-        
-        let okAction = UIAlertAction(title: "Ok", style: .Default) { action -> Void in
-            // do something if you want
+        for item in movies {
+            print("name = \(item.mName)")
         }
         
-        alert.addAction(okAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        // Best
+        for (index, item) in movies.enumerate() {
+            print("\(index) name = \(item.mName)")
+        }
+        
+        // Better
+        //        for i in 0..<videos.count {
+        //            let video = videos[i]
+        //            print("\(i) name = \(video.vName)")
+        //        }
+        
+        // Not good - old style
+        //        for var i = 0; i < videos.count; i++ {
+        //            let video = videos[i]
+        //            print("\(i) name = \(video.vName)")
+        //        }
     }
 }
 
