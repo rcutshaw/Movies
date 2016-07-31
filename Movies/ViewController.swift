@@ -28,6 +28,8 @@ class ViewController: UIViewController {
 
     func didLoadData(movies: [Movies]) {  // result from APIManager method is now the input to didLoadData - step 8
         
+        print(reachabilityStatus)
+        
         self.movies = movies  // stored in class instance
         
         for item in movies {
