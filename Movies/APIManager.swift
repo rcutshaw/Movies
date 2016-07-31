@@ -23,19 +23,40 @@ class APIManager {
             
             (data, response, error) -> () in  // get our 3 responses - data, response and error
             
-            // move everything back to main queue
-            dispatch_async(dispatch_get_main_queue()) {  // step 5
+            // if error, move everything back to main queue - step 5
+            if error != nil {
                 
-                if error != nil {  // step 6
-                    
-                    completion(result: (error!.localizedDescription))  // move error into result - // step 7
-                    
-                } else {
-                    
-                    completion(result: "NSURLSession successful")  // move successful string into result - // step 7
-                    print(data)  // step 9
-                    
+                dispatch_async(dispatch_get_main_queue()) {
+                    completion(result: (error!.localizedDescription))  // move error into result - step 6
                 }
+                    
+            } else {
+                
+                // Add JSONSerialization - step 7
+                do {
+                    /* .AllowFragments - top level object is not Array or Dictionary.
+                     Any type of string or value.
+                     NSJSONSerialization requires the Do / Try / Catch.
+                     Converts the NSDATA into a JSON object and casts it to a Dictionary. */
+                    
+                    if let json = try NSJSONSerialization.JSONObjectWithData(data!,
+                                                            options: .AllowFragments)
+                                                            as? [String: AnyObject] {
+                        print(json)  // step 10
+                        
+                        let priority = DISPATCH_QUEUE_PRIORITY_HIGH
+                        dispatch_async(dispatch_get_global_queue(priority, 0)) {  // step 8
+                            dispatch_async(dispatch_get_main_queue()) {
+                                completion(result: "JSONSerialization Successful")
+                            }
+                        }
+                    }
+                } catch {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        completion(result: "error in NSJSONSerialization")
+                    }
+                }
+                // End of JSONSerialization
             }
         }
         task.resume()  // starts the task - step 4

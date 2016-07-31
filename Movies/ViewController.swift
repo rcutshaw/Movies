@@ -20,7 +20,7 @@ class ViewController: UIViewController {
 
     func didLoadData(result:String) {  // result from APIManager method is now the input to didLoadData
         
-        print(result)  // step 8
+        print(result)  // step 9
         
         let alert = UIAlertController(title: (result), message: nil, preferredStyle: .Alert)
         
