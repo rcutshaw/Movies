@@ -14,8 +14,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let api = APIManager()
-        api.loadData("https://itunes.apple.com/us/rss/topmovies/limit=10/genre=4401/json",  // 1
-            completion: didLoadData)  // when done, executes didLoadData  // 2
+        api.loadData("https://itunes.apple.com/us/rss/topmovies/limit=10/genre=4401/json",  // step 1
+            completion: didLoadData)  // when done, executes didLoadData  // step 2
     }
 
     func didLoadData(result:String) {  // result from APIManager method is now the input to didLoadData

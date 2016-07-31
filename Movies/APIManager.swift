@@ -26,14 +26,14 @@ class APIManager {
             // move everything back to main queue
             dispatch_async(dispatch_get_main_queue()) {  // step 5
                 
-                if error != nil {  // satep 6
+                if error != nil {  // step 6
                     
                     completion(result: (error!.localizedDescription))  // move error into result - // step 7
                     
                 } else {
                     
                     completion(result: "NSURLSession successful")  // move successful string into result - // step 7
-                    print(data!)  // step 9
+                    print(data)  // step 9
                     
                 }
             }
