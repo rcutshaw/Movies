@@ -15,6 +15,8 @@
 		179F54131D4D4D6E0034670E /* MoviesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F54121D4D4D6E0034670E /* MoviesTests.swift */; };
 		179F541E1D4D4D6E0034670E /* MoviesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F541D1D4D4D6E0034670E /* MoviesUITests.swift */; };
 		179F54321D4D521C0034670E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F54311D4D521C0034670E /* APIManager.swift */; };
+		179F54341D4E3B3C0034670E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F54331D4E3B3C0034670E /* Constants.swift */; };
+		179F54361D4E3BCE0034670E /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F54351D4E3BCE0034670E /* Movies.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		179F541D1D4D4D6E0034670E /* MoviesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesUITests.swift; sourceTree = "<group>"; };
 		179F541F1D4D4D6E0034670E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		179F54311D4D521C0034670E /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		179F54331D4E3B3C0034670E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		179F54351D4E3BCE0034670E /* Movies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				179F54311D4D521C0034670E /* APIManager.swift */,
+				179F54351D4E3BCE0034670E /* Movies.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 		179F54301D4D4E330034670E /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				179F54331D4E3B3C0034670E /* Constants.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -307,9 +313,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				179F54361D4E3BCE0034670E /* Movies.swift in Sources */,
 				179F54321D4D521C0034670E /* APIManager.swift in Sources */,
 				179F54001D4D4D6D0034670E /* ViewController.swift in Sources */,
 				179F53FE1D4D4D6D0034670E /* AppDelegate.swift in Sources */,
+				179F54341D4E3B3C0034670E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

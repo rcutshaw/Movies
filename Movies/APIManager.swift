@@ -27,27 +27,27 @@ class APIManager {
             if error != nil {
                 
                 dispatch_async(dispatch_get_main_queue()) {
-                    completion(result: (error!.localizedDescription))  // move error into result - step 6
+                    completion(result: (error!.localizedDescription))  // move error into result - step 6 alternate
                 }
                     
             } else {
                 
-                // Add JSONSerialization - step 7
+                // Add JSONSerialization
                 do {
                     /* .AllowFragments - top level object is not Array or Dictionary.
                      Any type of string or value.
                      NSJSONSerialization requires the Do / Try / Catch.
                      Converts the NSDATA into a JSON object and casts it to a Dictionary. */
                     
-                    if let json = try NSJSONSerialization.JSONObjectWithData(data!,
+                    if let json = try NSJSONSerialization.JSONObjectWithData(data!,  // step 6 alternate
                                                             options: .AllowFragments)
                                                             as? [String: AnyObject] {
-                        print(json)  // step 10
+                        print(json)  // step 7
                         
                         let priority = DISPATCH_QUEUE_PRIORITY_HIGH
-                        dispatch_async(dispatch_get_global_queue(priority, 0)) {  // step 8
+                        dispatch_async(dispatch_get_global_queue(priority, 0)) {
                             dispatch_async(dispatch_get_main_queue()) {
-                                completion(result: "JSONSerialization Successful")
+                                completion(result: "JSONSerialization Successful")  // step 8
                             }
                         }
                     }
