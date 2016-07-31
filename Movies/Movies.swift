@@ -13,8 +13,16 @@ class Movies {
     // Data Encapsulation
     
     private var _mName:String
+    private var _mRights:String
+    private var _mPrice:String
+    private var _mSummary:String
+    private var _mRentalPrice:String
     private var _mImageUrl:String
     private var _mMovieUrl:String
+    private var _mImid:String
+    private var _mGenre:String
+    private var _mLinkToiTunes:String
+    private var _mReleaseDate:String
     
     // Make getters
     
@@ -22,12 +30,39 @@ class Movies {
         return _mName
     }
     
+    var mRights: String {
+        return _mRights
+    }
+    
+    var mPrice: String {
+        return _mPrice
+    }
+    
+    var mSummary: String {
+        return _mSummary
+    }
+
     var mImageUrl: String {
         return _mImageUrl
     }
     
     var mMovieUrl: String {
         return _mMovieUrl
+    }
+    
+    var mImid: String {
+        return _mImid
+    }
+    
+    var mGenre: String {
+        return _mImid
+    }
+    var mLinkToiTunes: String {
+        return _mLinkToiTunes
+    }
+    
+    var mReleaseDate: String {
+        return _mReleaseDate
     }
     
     init(data: JSONDictionary) {
@@ -44,6 +79,50 @@ class Movies {
             // Element in the JSON is unexpected
             
             _mName = ""
+        }
+        
+        // Movie Rights
+        if let rights = data["rights"] as? JSONDictionary,
+            mRights = rights["label"] as? String {
+            self._mRights = mRights
+        } else {
+            // You may not always get data back from the JSON - you may want to display message
+            // Element in the JSON is unexpected
+            
+            _mRights = ""
+        }
+        
+        // Movie Price
+        if let price = data["im:price"] as? JSONDictionary,
+            mPrice = price["label"] as? String {
+            self._mPrice = mPrice
+        } else {
+            // You may not always get data back from the JSON - you may want to display message
+            // Element in the JSON is unexpected
+            
+            _mPrice = ""
+        }
+        
+        // Movie summary
+        if let summary = data["im:name"] as? JSONDictionary,
+            mSummary = summary["label"] as? String {
+            self._mSummary = mSummary
+        } else {
+            // You may not always get data back from the JSON - you may want to display message
+            // Element in the JSON is unexpected
+            
+            _mSummary = ""
+        }
+        
+        // Movie rental price
+        if let rPrice = data["im:name"] as? JSONDictionary,
+            mRentalPrice = rPrice["label"] as? String {
+            self._mRentalPrice = mRentalPrice
+        } else {
+            // You may not always get data back from the JSON - you may want to display message
+            // Element in the JSON is unexpected
+            
+            _mRentalPrice = ""
         }
         
         // The Movie Image
@@ -71,7 +150,53 @@ class Movies {
             _mMovieUrl = ""
         }
         
+        // Movie Imid
+        if let imid = data["id"] as? JSONDictionary,
+            vid = imid["attributes"] as? JSONDictionary,
+            mImid = vid["im:id"] as? String {
+            self._mImid = mImid
+        } else {
+            // You may not always get data back from the JSON - you may want to display message
+            // Element in the JSON is unexpected
+            
+            _mImid = ""
+        }
+        
+        // Movie Genre
+        if let genre = data["category"] as? JSONDictionary,
+            ggenre = genre["attributes"] as? JSONDictionary,
+            mGenre = ggenre["term"] as? String {
+            self._mGenre = mGenre
+        } else {
+            // You may not always get data back from the JSON - you may want to display message
+            // Element in the JSON is unexpected
+            
+            _mGenre = ""
+        }
+        
+        // Movie Link to iTunes
+        if let ltoitunes = data["link"] as? JSONArray,
+            link1 = ltoitunes[1] as? JSONDictionary,
+            vRef = link1["attributes"] as? JSONDictionary,
+            mLinkToiTunes = vRef["href"] as? String {
+            self._mLinkToiTunes = mLinkToiTunes
+        } else {
+            // You may not always get data back from the JSON - you may want to display message
+            // Element in the JSON is unexpected
+            
+            _mLinkToiTunes = ""
+        }
+        
+        // Movie Release date
+        if let release = data["im:releaseDate"] as? JSONDictionary,
+            date = release["attributes"] as? JSONDictionary,
+            mReleaseDate = date["label"] as? String {
+            self._mReleaseDate = mReleaseDate
+        } else {
+            // You may not always get data back from the JSON - you may want to display message
+            // Element in the JSON is unexpected
+            
+            _mReleaseDate = ""
+        }
     }
-    
-    
 }
