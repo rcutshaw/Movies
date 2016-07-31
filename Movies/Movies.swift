@@ -10,8 +10,10 @@ import Foundation
 
 class Movies {
     
-    // Data Encapsulation
     
+    var mRank = 0
+    
+    // Data Encapsulation
     private var _mName:String
     private var _mRights:String
     private var _mPrice:String

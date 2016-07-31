@@ -44,8 +44,9 @@ class APIManager {
                                                             feed = json["feed"] as? JSONDictionary,
                                                             entries = feed["entry"] as? JSONArray {
                         var movies = [Movies]()
-                        for entry in entries {
+                        for (index, entry) in entries.enumerate() {
                             let entry = Movies(data: entry as! JSONDictionary)
+                            entry.mRank = index + 1
                             movies.append(entry)
                         }
                         
