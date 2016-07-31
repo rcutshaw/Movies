@@ -8,14 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var movies = [Movies]()  // created this array to hold all our fetched movies
+    
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var displayLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reachabilityStatusChanged), name: "ReachStatusChanged", object: nil)
         
@@ -28,7 +33,7 @@ class ViewController: UIViewController {
         //            print(result)
         //        }
 
-        api.loadData("https://itunes.apple.com/us/rss/topmovies/limit=10/genre=4401/json",  // step 1
+        api.loadData("https://itunes.apple.com/us/rss/topmovies/limit=50/genre=4401/json",  // step 1
             completion: didLoadData)  // when done, executes didLoadData  // step 2
     }
 
@@ -46,6 +51,8 @@ class ViewController: UIViewController {
         for (index, item) in movies.enumerate() {
             print("\(index) name = \(item.mName)")
         }
+        
+        tableView.reloadData()
         
         // Better
         //        for i in 0..<videos.count {
@@ -83,5 +90,25 @@ class ViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "ReachStatusChanged", object: nil)
     }
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movies.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        
+        let movie = movies[indexPath.row]
+        
+        cell.textLabel?.text = ("\(indexPath.row + 1)" )
+        
+        cell.detailTextLabel?.text = movie.mName
+        
+        return cell
+    }
 }
 
