@@ -26,6 +26,9 @@ class Movies {
     private var _mLinkToiTunes:String
     private var _mReleaseDate:String
     
+    // This variable gets created from the UI
+    var mImageData:NSData?
+    
     // Make getters
     
     var mName: String {

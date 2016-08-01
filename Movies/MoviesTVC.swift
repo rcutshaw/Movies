@@ -27,9 +27,9 @@ class MoviesTVC: UITableViewController {
         
         self.movies = movies  // stored in class instance
         
-        for item in movies {
-            print("name = \(item.mName)")
-        }
+//        for item in movies {
+//            print("name = \(item.mName)")
+//        }
         
         // Best
         for (index, item) in movies.enumerate() {
