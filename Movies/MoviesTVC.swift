@@ -16,9 +16,15 @@ class MoviesTVC: UITableViewController {
         super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reachabilityStatusChanged), name: "ReachStatusChanged", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(preferredFontChanged), name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
         reachabilityStatusChanged()
         
+    }
+    
+    func preferredFontChanged() {
+        
+        print("The preferred Font has changed")
     }
     
     func didLoadData(movies: [Movies]) {  // result from APIManager method is now the input to didLoadData - step 8

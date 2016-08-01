@@ -23,6 +23,10 @@ class MoviesTableViewCell: UITableViewCell {
     @IBOutlet weak var movieTitle: UILabel!
     
     func updateCell() {
+        
+        movieTitle.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        rank.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
+        
         movieTitle.text = movie?.mName
         rank.text = ("\(movie!.mRank)")
         //movieImage.image = UIImage(named: "imageNotAvailable")
