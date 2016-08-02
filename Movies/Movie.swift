@@ -25,6 +25,7 @@ class XMovies { // This was originally named 'Movies'.  Had to rename it 'XMovie
     private var _mSummary:String
     private var _mRentalPrice:String
     private var _mImageUrl:String
+    private var _mArtist:String
     private var _mMovieUrl:String
     private var _mImid:String
     private var _mGenre:String
@@ -54,6 +55,10 @@ class XMovies { // This was originally named 'Movies'.  Had to rename it 'XMovie
 
     var mImageUrl: String {
         return _mImageUrl
+    }
+    
+    var mArtist: String {
+        return _mArtist
     }
     
     var mMovieUrl: String {
@@ -145,6 +150,17 @@ class XMovies { // This was originally named 'Movies'.  Had to rename it 'XMovie
             // Element in the JSON is unexpected
             
             _mImageUrl = ""
+        }
+        
+        // The Artist
+        if let artist = data["im:artist"] as? JSONDictionary,
+            mArtist = artist["label"] as? String {
+            self._mArtist = mArtist
+        } else {
+            // You may not always get data back from the JSON - you may want to display message
+            // Element in the JSON is unexpected
+            
+            _mArtist = ""
         }
         
         // Movie Url

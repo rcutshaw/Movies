@@ -23,7 +23,7 @@ class MovieDetailVC: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(preferredFontChanged), name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
-        //title = movies.mName
+        title = movies.mArtist
         mName.text = movies.mName
         mPrice.text = movies.mPrice
         mRights.text = movies.mRights
