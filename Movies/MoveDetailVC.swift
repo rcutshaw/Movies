@@ -1,5 +1,5 @@
 //
-//  MoveDetailVC.swift
+//  MovieDetailVC.swift
 //  Movies
 //
 //  Created by David Cutshaw on 8/1/16.
@@ -8,28 +8,30 @@
 
 import UIKit
 
-class MoveDetailVC: UIViewController {
+class MovieDetailVC: UIViewController {
 
+    var movies: XMovies!
+    
+    @IBOutlet weak var mName: UILabel!
+    @IBOutlet weak var mMovieImage: UIImageView!
+    @IBOutlet weak var mGenre: UILabel!
+    @IBOutlet weak var mPrice: UILabel!
+    @IBOutlet weak var mRights: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        //title = movies.mName
+        mName.text = movies.mName
+        mPrice.text = movies.mPrice
+        mRights.text = movies.mRights
+        mGenre.text = movies.mGenre
+        
+        if movies.mImageData != nil {
+            mMovieImage.image = UIImage(data: movies.mImageData!)
+        } else {
+            mMovieImage.image = UIImage(named: "imageNotAvailable")
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -1,5 +1,5 @@
 //
-//  MoviesTVC.swift
+//  MovieTVC.swift
 //  Movies
 //
 //  Created by David Cutshaw on 7/31/16.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class MoviesTVC: UITableViewController {
+class MovieTVC: UITableViewController {
 
-    var movies = [Movies]()  // created this array to hold all our fetched movies
+    var movies = [XMovies]()  // created this array to hold all our fetched movies
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,34 +27,18 @@ class MoviesTVC: UITableViewController {
         print("The preferred Font has changed")
     }
     
-    func didLoadData(movies: [Movies]) {  // result from APIManager method is now the input to didLoadData - step 8
+    func didLoadData(movies: [XMovies]) {  // result from APIManager method is now the input to didLoadData - step 8
         
         print(reachabilityStatus)
         
         self.movies = movies  // stored in class instance
         
-//        for item in movies {
-//            print("name = \(item.mName)")
-//        }
-        
-        // Best
         for (index, item) in movies.enumerate() {
-            print("\(index) name = \(item.mName)")
+            print("\(index) title = \(item.mName)")
+            
         }
         
         tableView.reloadData()
-        
-        // Better
-        //        for i in 0..<videos.count {
-        //            let video = videos[i]
-        //            print("\(i) name = \(video.vName)")
-        //        }
-        
-        // Not good - old style
-        //        for var i = 0; i < videos.count; i++ {
-        //            let video = videos[i]
-        //            print("\(i) name = \(video.vName)")
-        //        }
     }
     
     func reachabilityStatusChanged()
@@ -117,6 +101,7 @@ class MoviesTVC: UITableViewController {
     deinit
     {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "ReachStatusChanged", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIContentSizeCategoryDidChangeNotification, object: nil)
     }
     
     // MARK: - Table view data source
@@ -131,14 +116,17 @@ class MoviesTVC: UITableViewController {
 
     private struct storyboard {
         static let cellReuseIdentifier = "cell"
+        static let segueIdentifier = "movieDetail"
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.cellReuseIdentifier, forIndexPath: indexPath) as! MoviesTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.cellReuseIdentifier, forIndexPath: indexPath) as! MovieTableViewCell
         
         cell.movie = movies[indexPath.row]
         
+        print("indexPath = \(indexPath.row)", "movies[\(indexPath.row)] = \(movies[indexPath.row].mName)")
+            
         return cell
     }
 
@@ -177,14 +165,19 @@ class MoviesTVC: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == storyboard.segueIdentifier {
+            
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let movie = movies[indexPath.row]
+                let dvc = segue.destinationViewController as! MovieDetailVC
+                dvc.movies = movie
+            }
+        }
     }
-    */
 
 }

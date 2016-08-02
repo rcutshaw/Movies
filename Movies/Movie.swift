@@ -1,5 +1,5 @@
 //
-//  Movies.swift
+//  Movie.swift
 //  Movies
 //
 //  Created by David Cutshaw on 7/31/16.
@@ -8,9 +8,14 @@
 
 import Foundation
 
-class Movies {
-    
-    
+class XMovies { // This was originally named 'Movies'.  Had to rename it 'XMovies' to avoid a conflict in an Apple SDK.
+                // When it was 'Movies', I got a console error on line in APIManager.swift at "var movies = [XMovies]()".
+                // The error was --> expression produced error: /var/folders/6c/yckqgz_11dn67j50jfz2zczh0000gn/T/lldb/6276/expr21.swift:1:65: error:
+                // 'Movies' is not a member type of 'Movies' $__lldb__DumpForDebugger(Swift.UnsafePointer<Swift.Array<Movies.Movies>>(bitPattern:
+                // 0x102fd04a0).memory) ~~~~~~ ^ /var/folders/6c/yckqgz_11dn67j50jfz2zczh0000gn/T/lldb/6276/expr19.swift:1:45: note: while parsing
+                // this '<' as a type parameter bracket $__lldb__DumpForDebugger(Swift.UnsafePointer<Swift.Array<Movies.Movies>>(bitPattern:
+                // 0x102fd04a0).memory)
+
     var mRank = 0
     
     // Data Encapsulation
@@ -60,7 +65,7 @@ class Movies {
     }
     
     var mGenre: String {
-        return _mImid
+        return _mGenre
     }
     var mLinkToiTunes: String {
         return _mLinkToiTunes
@@ -133,8 +138,8 @@ class Movies {
         // The Movie Image
         if let img = data["im:image"] as? JSONArray,
             image = img[2] as? JSONDictionary,
-            immage = image["label"] as? String {
-            _mImageUrl = immage.stringByReplacingOccurrencesOfString("170x170", withString: "600x600")
+            mImageUrl = image["label"] as? String {
+            _mImageUrl = mImageUrl.stringByReplacingOccurrencesOfString("170x170", withString: "600x600")
         } else {
             // You may not always get data back from the JSON - you may want to display message
             // Element in the JSON is unexpected

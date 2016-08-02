@@ -10,7 +10,7 @@ import Foundation
 
 class APIManager {
     
-    func loadData(urlString: String, completion: (movies: [Movies]) -> ()) {  // step 2 and step 7
+    func loadData(urlString: String, completion: [XMovies] -> ()) {  // step 2 and step 7
         
         // Get a non-cached session
         let config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
@@ -38,14 +38,13 @@ class APIManager {
                      Converts the NSDATA into a JSON object and casts it to a Dictionary. */
                     
                     // step 3
-                    if let json = try NSJSONSerialization.JSONObjectWithData(data!,
-                                                            options: .AllowFragments)
-                                                            as? JSONDictionary,
-                                                            feed = json["feed"] as? JSONDictionary,
-                                                            entries = feed["entry"] as? JSONArray {
-                        var movies = [Movies]()
+                    if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? JSONDictionary,
+                                feed = json["feed"] as? JSONDictionary,
+                                entries = feed["entry"] as? JSONArray {
+                        
+                        var movies = [XMovies]()
                         for (index, entry) in entries.enumerate() {
-                            let entry = Movies(data: entry as! JSONDictionary)
+                            let entry = XMovies(data: entry as! JSONDictionary)
                             entry.mRank = index + 1
                             movies.append(entry)
                         }
@@ -58,7 +57,7 @@ class APIManager {
                         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT  // step 6
                         dispatch_async(dispatch_get_global_queue(priority, 0)) {
                             dispatch_async(dispatch_get_main_queue()) {
-                                completion(movies: movies)
+                                completion(movies)
                             }
                         }
                     }
