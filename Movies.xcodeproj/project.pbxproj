@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		172967AC1D4E997800DB86F5 /* MoviesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172967AB1D4E997800DB86F5 /* MoviesTableViewCell.swift */; };
 		172967B01D4FE20B00DB86F5 /* MoveDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172967AF1D4FE20B00DB86F5 /* MoveDetailVC.swift */; };
+		1784B7F31D51481700407412 /* SettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1784B7F21D51481700407412 /* SettingsTVC.swift */; };
 		179F53FE1D4D4D6D0034670E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F53FD1D4D4D6D0034670E /* AppDelegate.swift */; };
 		179F54001D4D4D6D0034670E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179F53FF1D4D4D6D0034670E /* ViewController.swift */; };
 		179F54031D4D4D6D0034670E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 179F54011D4D4D6D0034670E /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		172967AB1D4E997800DB86F5 /* MoviesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesTableViewCell.swift; sourceTree = "<group>"; };
 		172967AF1D4FE20B00DB86F5 /* MoveDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveDetailVC.swift; sourceTree = "<group>"; };
+		1784B7F21D51481700407412 /* SettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVC.swift; sourceTree = "<group>"; };
 		179F53FA1D4D4D6D0034670E /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		179F53FD1D4D4D6D0034670E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		179F53FF1D4D4D6D0034670E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 		179F542C1D4D4DA90034670E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1784B7F21D51481700407412 /* SettingsTVC.swift */,
 				179F53FF1D4D4D6D0034670E /* ViewController.swift */,
 				179F543D1D4E75760034670E /* MoviesTVC.swift */,
 				172967AB1D4E997800DB86F5 /* MoviesTableViewCell.swift */,
@@ -337,6 +340,7 @@
 				179F543A1D4E526F0034670E /* Reachability.m in Sources */,
 				172967B01D4FE20B00DB86F5 /* MoveDetailVC.swift in Sources */,
 				179F543E1D4E75760034670E /* MoviesTVC.swift in Sources */,
+				1784B7F31D51481700407412 /* SettingsTVC.swift in Sources */,
 				179F54341D4E3B3C0034670E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
