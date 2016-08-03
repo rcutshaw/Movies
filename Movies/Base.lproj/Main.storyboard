@@ -98,7 +98,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iK6-TU-yfy">
-                                <rect key="frame" x="1" y="132" width="599" height="282"/>
+                                <rect key="frame" x="1" y="130" width="599" height="282"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDk-SU-3NP">
                                 <rect key="frame" x="7" y="64" width="586" height="69"/>
@@ -149,13 +149,13 @@
                             <constraint firstItem="6uI-ft-gHH" firstAttribute="trailing" secondItem="hSr-k2-JS7" secondAttribute="trailingMargin" id="Pqr-PO-86m"/>
                             <constraint firstItem="hDk-SU-3NP" firstAttribute="leading" secondItem="hSr-k2-JS7" secondAttribute="leadingMargin" constant="-13" id="Zrz-BS-d1l"/>
                             <constraint firstItem="l9c-Lr-CkA" firstAttribute="leading" secondItem="hSr-k2-JS7" secondAttribute="leadingMargin" id="aRS-X3-YgX"/>
-                            <constraint firstItem="iK6-TU-yfy" firstAttribute="top" secondItem="PqU-ct-m3w" secondAttribute="bottom" constant="68" id="c8t-fW-eZ7"/>
+                            <constraint firstItem="iK6-TU-yfy" firstAttribute="top" secondItem="PqU-ct-m3w" secondAttribute="bottom" constant="66" id="c8t-fW-eZ7"/>
                             <constraint firstItem="hDk-SU-3NP" firstAttribute="centerX" secondItem="iK6-TU-yfy" secondAttribute="centerX" id="dJm-W2-Tqg"/>
                             <constraint firstItem="iK6-TU-yfy" firstAttribute="leading" secondItem="9Ng-D4-Ilc" secondAttribute="leading" id="eEE-dQ-XCb"/>
-                            <constraint firstItem="l9c-Lr-CkA" firstAttribute="baseline" secondItem="6uI-ft-gHH" secondAttribute="baseline" id="eGe-IY-pUk"/>
+                            <constraint firstItem="6uI-ft-gHH" firstAttribute="baseline" secondItem="l9c-Lr-CkA" secondAttribute="baseline" id="eGe-IY-pUk"/>
                             <constraint firstItem="9Ng-D4-Ilc" firstAttribute="bottom" secondItem="6Je-Wp-VPu" secondAttribute="top" id="gOU-cF-FHD"/>
                             <constraint firstItem="iK6-TU-yfy" firstAttribute="centerX" secondItem="hSr-k2-JS7" secondAttribute="centerX" id="hyx-Br-jRl"/>
-                            <constraint firstItem="l9c-Lr-CkA" firstAttribute="top" secondItem="iK6-TU-yfy" secondAttribute="bottom" constant="1" id="oCz-Mb-zmk"/>
+                            <constraint firstItem="l9c-Lr-CkA" firstAttribute="top" secondItem="iK6-TU-yfy" secondAttribute="bottom" constant="3" id="oCz-Mb-zmk"/>
                             <constraint firstItem="6Je-Wp-VPu" firstAttribute="top" secondItem="iK6-TU-yfy" secondAttribute="bottom" constant="8" symbolic="YES" id="r9E-Wf-eJY"/>
                             <constraint firstItem="9Ng-D4-Ilc" firstAttribute="top" secondItem="l9c-Lr-CkA" secondAttribute="bottom" constant="8" symbolic="YES" id="ryb-Oq-MSd"/>
                             <constraint firstItem="hDk-SU-3NP" firstAttribute="top" secondItem="PqU-ct-m3w" secondAttribute="bottom" id="vrw-YL-ZtH"/>
@@ -176,8 +176,17 @@
                                 <exclude reference="9Ng-D4-Ilc"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="4MM-77-p8g"/>
+                                <exclude reference="Zrz-BS-d1l"/>
                                 <exclude reference="dJm-W2-Tqg"/>
+                                <exclude reference="vrw-YL-ZtH"/>
+                                <exclude reference="3LC-Nc-Kb9"/>
+                                <exclude reference="aRS-X3-YgX"/>
+                                <exclude reference="eGe-IY-pUk"/>
                                 <exclude reference="oCz-Mb-zmk"/>
+                                <exclude reference="gOU-cF-FHD"/>
+                                <exclude reference="ryb-Oq-MSd"/>
+                                <exclude reference="Pqr-PO-86m"/>
                                 <exclude reference="11i-mU-Rpo"/>
                                 <include reference="7Oc-zH-Kmy"/>
                                 <include reference="7vS-ba-cYw"/>
@@ -287,6 +296,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2cd-AS-77v">
                                                     <rect key="frame" x="535" y="26" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="touchIdSec:" destination="yts-8y-hIP" eventType="valueChanged" id="Fb7-p0-MW8"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
