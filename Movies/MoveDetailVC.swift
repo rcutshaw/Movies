@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 class MovieDetailVC: UIViewController {
 
@@ -44,6 +46,17 @@ class MovieDetailVC: UIViewController {
         mRights.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     }
 
+    @IBAction func playVideo(sender: UIBarButtonItem) {
+        
+        let url = NSURL(string: movies.mMovieUrl)!
+        let player = AVPlayer(URL: url)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.presentViewController(playerViewController, animated: true ) {
+            playerViewController.player?.play()
+        }
+    }
+    
     // Is called just as the object is about to be deallocated
     deinit
     {
