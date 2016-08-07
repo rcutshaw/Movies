@@ -11,6 +11,9 @@ import UIKit
 class MovieTVC: UITableViewController {
 
     var movies = [XMovies]()  // created this array to hold all our fetched movies
+    var filterSearch = [XMovies]()
+    let resultSearchController = UISearchController(searchResultsController: nil)
+    
     var limit = 10
     
     override func viewDidLoad() {
@@ -42,6 +45,21 @@ class MovieTVC: UITableViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.redColor()]
         
         title = ("The iTunes Top \(limit) Movies")
+        
+        // Setup the Search Controller
+        
+        //resultSearchController.searchResultsUpdater = self
+        
+        definesPresentationContext = true
+        
+        resultSearchController.dimsBackgroundDuringPresentation = false
+        
+        resultSearchController.searchBar.placeholder = "Search for Artist"
+        
+        resultSearchController.searchBar.searchBarStyle = UISearchBarStyle.Prominent
+        
+        // add the search bar to your tableview
+        tableView.tableHeaderView = resultSearchController.searchBar
         
         tableView.reloadData()
     }
@@ -204,7 +222,12 @@ class MovieTVC: UITableViewController {
         if segue.identifier == storyboard.segueIdentifier {
             
             if let indexPath = tableView.indexPathForSelectedRow {
-                let movie = movies[indexPath.row]
+                let movie: XMovies
+                if resultSearchController.active {
+                    movie = filterSearch[indexPath.row]
+                } else {
+                    movie = movies[indexPath.row]
+                }
                 let dvc = segue.destinationViewController as! MovieDetailVC
                 dvc.movies = movie
             }
