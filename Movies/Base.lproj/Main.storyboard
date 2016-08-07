@@ -186,13 +186,6 @@
                                 <exclude reference="Zrz-BS-d1l"/>
                                 <exclude reference="dJm-W2-Tqg"/>
                                 <exclude reference="vrw-YL-ZtH"/>
-                                <exclude reference="3LC-Nc-Kb9"/>
-                                <exclude reference="aRS-X3-YgX"/>
-                                <exclude reference="eGe-IY-pUk"/>
-                                <exclude reference="oCz-Mb-zmk"/>
-                                <exclude reference="gOU-cF-FHD"/>
-                                <exclude reference="ryb-Oq-MSd"/>
-                                <exclude reference="Pqr-PO-86m"/>
                                 <exclude reference="11i-mU-Rpo"/>
                                 <include reference="7Oc-zH-Kmy"/>
                                 <include reference="7vS-ba-cYw"/>
@@ -200,7 +193,14 @@
                                 <exclude reference="c8t-fW-eZ7"/>
                                 <exclude reference="eEE-dQ-XCb"/>
                                 <include reference="hyx-Br-jRl"/>
+                                <exclude reference="3LC-Nc-Kb9"/>
+                                <exclude reference="aRS-X3-YgX"/>
+                                <exclude reference="oCz-Mb-zmk"/>
+                                <exclude reference="gOU-cF-FHD"/>
+                                <exclude reference="ryb-Oq-MSd"/>
                                 <include reference="r9E-Wf-eJY"/>
+                                <exclude reference="Pqr-PO-86m"/>
+                                <exclude reference="eGe-IY-pUk"/>
                             </mask>
                         </variation>
                     </view>
@@ -214,6 +214,9 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="SvK-AN-Rnh"/>
                         <barButtonItem systemItem="action" id="9Hp-RX-eww">
                             <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="socialMedia:" destination="crM-fT-dqs" id="t05-rR-qFn"/>
+                            </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <connections>
@@ -359,17 +362,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TQP-to-ewu">
-                                                    <rect key="frame" x="8" y="8" width="584" height="75"/>
+                                                    <rect key="frame" x="528" y="8" width="64" height="75"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="64" id="nBv-2S-jxs"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hs7-AT-F3p">
+                                                    <rect key="frame" x="8" y="31" width="300" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="300" id="AlS-Gk-VE2"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="TQP-to-ewu" secondAttribute="bottom" id="4Gm-xB-sED"/>
-                                                <constraint firstItem="TQP-to-ewu" firstAttribute="trailing" secondItem="PNi-zM-YZD" secondAttribute="trailingMargin" id="H0p-B3-o2x"/>
-                                                <constraint firstItem="TQP-to-ewu" firstAttribute="top" secondItem="PNi-zM-YZD" secondAttribute="topMargin" id="Ici-59-gkl"/>
-                                                <constraint firstItem="TQP-to-ewu" firstAttribute="leading" secondItem="PNi-zM-YZD" secondAttribute="leadingMargin" id="QAj-WL-gd0"/>
+                                                <constraint firstItem="Hs7-AT-F3p" firstAttribute="leading" secondItem="PNi-zM-YZD" secondAttribute="leadingMargin" id="3dd-JI-Swb"/>
+                                                <constraint firstItem="Hs7-AT-F3p" firstAttribute="centerY" secondItem="PNi-zM-YZD" secondAttribute="centerY" id="E6d-nh-xg2"/>
+                                                <constraint firstItem="Hs7-AT-F3p" firstAttribute="top" secondItem="PNi-zM-YZD" secondAttribute="topMargin" constant="23" id="kAN-os-18z"/>
+                                                <constraint firstItem="TQP-to-ewu" firstAttribute="trailing" secondItem="PNi-zM-YZD" secondAttribute="trailingMargin" id="koy-Uh-BKw"/>
+                                                <constraint firstAttribute="bottom" secondItem="TQP-to-ewu" secondAttribute="bottom" id="pil-0t-qZV"/>
+                                                <constraint firstItem="TQP-to-ewu" firstAttribute="top" secondItem="PNi-zM-YZD" secondAttribute="topMargin" id="ute-q1-doF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -386,11 +403,21 @@
                                                         <action selector="valueChanged:" destination="yts-8y-hIP" eventType="valueChanged" id="cwW-e0-45z"/>
                                                     </connections>
                                                 </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag the slider below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKs-Oe-dYI">
+                                                    <rect key="frame" x="8" y="8" width="584" height="21"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="JKs-Oe-dYI" firstAttribute="top" secondItem="XN5-nM-Xly" secondAttribute="topMargin" id="9Nc-Yx-HMk"/>
+                                                <constraint firstItem="JKs-Oe-dYI" firstAttribute="leading" secondItem="XN5-nM-Xly" secondAttribute="leadingMargin" id="DDw-dY-yrS"/>
                                                 <constraint firstItem="Cg9-ie-kqH" firstAttribute="centerY" secondItem="XN5-nM-Xly" secondAttribute="centerY" id="ILA-Hn-bkm"/>
                                                 <constraint firstItem="Cg9-ie-kqH" firstAttribute="centerX" secondItem="XN5-nM-Xly" secondAttribute="centerX" id="M5z-wT-YJy"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="JKs-Oe-dYI" secondAttribute="bottom" constant="46" id="OGa-vD-kD5"/>
                                                 <constraint firstItem="Cg9-ie-kqH" firstAttribute="leading" secondItem="XN5-nM-Xly" secondAttribute="leadingMargin" constant="40" id="Oyg-S9-ruh"/>
+                                                <constraint firstItem="JKs-Oe-dYI" firstAttribute="centerX" secondItem="Cg9-ie-kqH" secondAttribute="centerX" id="n5s-u3-0SU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -406,7 +433,9 @@
                         <outlet property="APICnt" destination="TQP-to-ewu" id="WVA-Dt-XNT"/>
                         <outlet property="aboutDisplay" destination="NOD-1k-rVm" id="Au5-SW-0Wr"/>
                         <outlet property="bestImageDisplay" destination="exG-Yz-19d" id="TDn-k2-hlD"/>
+                        <outlet property="dragSliderLabel" destination="JKs-Oe-dYI" id="Fmh-A9-rxT"/>
                         <outlet property="feedbackDisplay" destination="kOR-vh-8lC" id="Xd0-CY-vTh"/>
+                        <outlet property="numberOfVideos" destination="Hs7-AT-F3p" id="3qD-mT-K4F"/>
                         <outlet property="securityDisplay" destination="R5U-KI-hzj" id="SML-fX-Ibh"/>
                         <outlet property="sliderCnt" destination="Cg9-ie-kqH" id="TIs-kx-gGG"/>
                         <outlet property="touchID" destination="2cd-AS-77v" id="cRY-jC-dNf"/>
