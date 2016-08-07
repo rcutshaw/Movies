@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieTVC: UITableViewController, UISearchResultsUpdating {
+class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
 
     var movies = [XMovies]()  // created this array to hold all our fetched movies
     var filterSearch = [XMovies]()
@@ -54,7 +54,7 @@ class MovieTVC: UITableViewController, UISearchResultsUpdating {
         
         resultSearchController.dimsBackgroundDuringPresentation = false
         
-        resultSearchController.searchBar.placeholder = "Search for Artist"
+        resultSearchController.searchBar.placeholder = "Search for Artist, Name, Rank"
         
         resultSearchController.searchBar.searchBarStyle = UISearchBarStyle.Prominent
         
@@ -246,17 +246,30 @@ class MovieTVC: UITableViewController, UISearchResultsUpdating {
         }
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        searchController.searchBar.text!.lowercaseString
-        filterSearch(searchController.searchBar.text!)
-    }
+    //    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    //        searchController.searchBar.text!.lowercaseString
+    //        filterSearch(searchController.searchBar.text!)
+    //    }
     
     
     func filterSearch(searchText: String) {
         filterSearch = movies.filter { movies in
-            return movies.mArtist.lowercaseString.containsString(searchText.lowercaseString)
+            return movies.mArtist.lowercaseString.containsString(searchText.lowercaseString) ||
+                movies.mName.lowercaseString.containsString(searchText.lowercaseString) || "\(movies.mRank)".lowercaseString.containsString(searchText.lowercaseString)
         }
         
         tableView.reloadData()
+    }
+    
+}
+
+// If you want, you can add this extension and remove the protocol from the class definition and
+// remove the func updateSearchResultsForSearchController from this file
+// Another way is to not put the extension in this file here, but create a separate file and put
+// all your extensions, including this one in that file.  Your choice!
+extension MovieTVC: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        searchController.searchBar.text!.lowercaseString
+        filterSearch(searchController.searchBar.text!)
     }
 }
