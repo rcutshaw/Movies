@@ -52,7 +52,6 @@ class APIManager {
                         
                         let i = movies.count
                         print("iTunesApiManager - total count --> \(i)")  // step 5
-                        print(" ")
                         
                         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT  // step 6
                         dispatch_async(dispatch_get_global_queue(priority, 0)) {

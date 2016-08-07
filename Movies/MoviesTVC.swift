@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieTVC: UITableViewController {
+class MovieTVC: UITableViewController, UISearchResultsUpdating {
 
     var movies = [XMovies]()  // created this array to hold all our fetched movies
     var filterSearch = [XMovies]()
@@ -38,7 +38,7 @@ class MovieTVC: UITableViewController {
         self.movies = movies  // stored in class instance
         
         for (index, item) in movies.enumerate() {
-            print("\(index) title = \(item.mName)")
+            print("\(index) title = \(item.mName) - artist = \(item.mArtist)")
             
         }
         
@@ -48,7 +48,7 @@ class MovieTVC: UITableViewController {
         
         // Setup the Search Controller
         
-        //resultSearchController.searchResultsUpdater = self
+        resultSearchController.searchResultsUpdater = self
         
         definesPresentationContext = true
         
@@ -115,7 +115,11 @@ class MovieTVC: UITableViewController {
     @IBAction func refresh(sender: UIRefreshControl) {
         
         refreshControl?.endRefreshing()
-        runAPI()
+        if resultSearchController.active {
+            refreshControl?.attributedTitle = NSAttributedString(string: "No refresh allowed in search")
+        } else {
+            runAPI()
+        }
         
     }
     
@@ -160,7 +164,11 @@ class MovieTVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        if resultSearchController.active {
+            return filterSearch.count
+        } else {
+            return movies.count
+        }
     }
 
     private struct storyboard {
@@ -172,9 +180,13 @@ class MovieTVC: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.cellReuseIdentifier, forIndexPath: indexPath) as! MovieTableViewCell
         
-        cell.movie = movies[indexPath.row]
+        if resultSearchController.active {
+            cell.movie = filterSearch[indexPath.row]
+        } else {
+            cell.movie = movies[indexPath.row]
+        }
         
-        print("indexPath = \(indexPath.row)", "movies[\(indexPath.row)] = \(movies[indexPath.row].mName)")
+//        print("indexPath = \(indexPath.row)", "movies[\(indexPath.row)] = \(movies[indexPath.row].mName)")
             
         return cell
     }
@@ -233,5 +245,18 @@ class MovieTVC: UITableViewController {
             }
         }
     }
-
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        searchController.searchBar.text!.lowercaseString
+        filterSearch(searchController.searchBar.text!)
+    }
+    
+    
+    func filterSearch(searchText: String) {
+        filterSearch = movies.filter { movies in
+            return movies.mArtist.lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        tableView.reloadData()
+    }
 }
