@@ -21,6 +21,19 @@ class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reachabilityStatusChanged), name: "ReachStatusChanged", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(preferredFontChanged), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(bestImageQualityChanged), name: "BestImageQualityChanged", object: nil)
+        
+        // I want to use the best image quality the first time the app gets launched after a fresh installation,
+        // before user defaults have been set - this won't get called thereafter and will rely on values set in
+        // user defaults by UI switches.
+        if !NSUserDefaults.standardUserDefaults().boolForKey("isNotFirstLaunch") {
+            //Set autoAdjustSettings and isNotFirstLaunch to true
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "BestImageQualSetting")
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isNotFirstLaunch")
+            
+            //Sync NSUserDefaults
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
         
         reachabilityStatusChanged()
         
@@ -58,7 +71,10 @@ class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
         
         resultSearchController.searchBar.searchBarStyle = UISearchBarStyle.Prominent
         
+        resultSearchController.searchBar.sizeToFit()  // For some reason, need to call this so that search bar shows up on iPad 2 with iOS 8.4
+        // Evidently, the search bar frame is set to CGRectZero if not called here.
         // add the search bar to your tableview
+        
         tableView.tableHeaderView = resultSearchController.searchBar
         
         tableView.reloadData()
@@ -112,6 +128,11 @@ class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
         }
     }
     
+    func bestImageQualityChanged() {
+        
+        runAPI()
+    }
+    
     @IBAction func refresh(sender: UIRefreshControl) {
         
         refreshControl?.endRefreshing()
@@ -155,6 +176,7 @@ class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
     {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "ReachStatusChanged", object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "BestImageQualityChanged", object: nil)
     }
     
     // MARK: - Table view data source

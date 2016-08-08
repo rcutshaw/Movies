@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import LocalAuthentication
 
 class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
 
@@ -20,6 +21,8 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var sliderCnt: UISlider!
     @IBOutlet weak var numberOfVideos: UILabel!
     @IBOutlet weak var dragSliderLabel: UILabel!
+    @IBOutlet weak var securityCheckLabel: UILabel!
+    @IBOutlet weak var bestQualitySwitch: UISwitch!
     
     override func viewDidLoad() {
         
@@ -31,6 +34,16 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
         title = "Settings"
         
         touchID.on = NSUserDefaults.standardUserDefaults().boolForKey("SecSetting")
+        
+        // Create the Local Authentication Context
+        let context = LAContext()
+        var touchIDError : NSError?
+        if context.canEvaluatePolicy(LAPolicy.DeviceOwnerAuthenticationWithBiometrics, error:&touchIDError) {
+            self.securityCheckLabel.hidden = true
+        } else {
+            self.securityCheckLabel.hidden = false
+            self.touchID.enabled = false
+        }
         
         if (NSUserDefaults.standardUserDefaults().objectForKey("APICNT") != nil) {
             let theValue = NSUserDefaults.standardUserDefaults().objectForKey("APICNT") as! Int
@@ -57,6 +70,17 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
         } else {
             defaults.setBool(false, forKey: "SecSetting")
         }
+    }
+    
+    @IBAction func bestImageQual(sender: UISwitch) {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if bestQualitySwitch.on == true {
+            defaults.setBool(bestQualitySwitch.on, forKey: "BestImageQualSetting")
+        } else {
+            defaults.setBool(false, forKey: "BestImageQualSetting")
+        }
+        NSNotificationCenter.defaultCenter().postNotificationName("BestImageQualityChanged", object: nil)
     }
     
     func preferredFontChanged() {
@@ -87,8 +111,6 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
             }
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
-        
-        
         
     }
     
