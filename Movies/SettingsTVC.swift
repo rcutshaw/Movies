@@ -28,7 +28,15 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
         
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(preferredFontChanged), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        #if swift(>=2.2)
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(preferredFontChanged), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+            
+        #else
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredFontChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+            
+        #endif
         
         tableView.alwaysBounceVertical = false
         title = "Settings"

@@ -10,8 +10,8 @@ import UIKit
 
 class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
 
-    var movies = [XMovies]()  // created this array to hold all our fetched movies
-    var filterSearch = [XMovies]()
+    var movies = [XMovie]()  // created this array to hold all our fetched movies
+    var filterSearch = [XMovie]()
     let resultSearchController = UISearchController(searchResultsController: nil)
     
     var limit = 10
@@ -19,9 +19,19 @@ class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reachabilityStatusChanged), name: "ReachStatusChanged", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(preferredFontChanged), name: UIContentSizeCategoryDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(bestImageQualityChanged), name: "BestImageQualityChanged", object: nil)
+        #if swift(>=2.2)
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(reachabilityStatusChanged), name: "ReachStatusChanged", object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(preferredFontChanged), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(bestImageQualityChanged), name: "BestImageQualityChanged", object: nil)
+            
+        #else
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityStatusChanged", name: "ReachStatusChanged", object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredFontChanged", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "bestImageQualityChanged", name: "BestImageQualityChanged", object: nil)
+            
+        #endif
         
         // I want to use the best image quality the first time the app gets launched after a fresh installation,
         // before user defaults have been set - this won't get called thereafter and will rely on values set in
@@ -44,7 +54,7 @@ class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
         print("The preferred Font has changed")
     }
     
-    func didLoadData(movies: [XMovies]) {  // result from APIManager method is now the input to didLoadData - step 8
+    func didLoadData(movies: [XMovie]) {  // result from APIManager method is now the input to didLoadData - step 8
         
         print(reachabilityStatus)
         
@@ -256,7 +266,7 @@ class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
         if segue.identifier == storyboard.segueIdentifier {
             
             if let indexPath = tableView.indexPathForSelectedRow {
-                let movie: XMovies
+                let movie: XMovie
                 if resultSearchController.active {
                     movie = filterSearch[indexPath.row]
                 } else {

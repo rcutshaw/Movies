@@ -13,7 +13,7 @@ import LocalAuthentication
 
 class MovieDetailVC: UIViewController {
 
-    var movies: XMovies!
+    var movies: XMovie!
     var securitySwitch:Bool = false
     
     @IBOutlet weak var mName: UILabel!

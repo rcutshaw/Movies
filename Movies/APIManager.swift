@@ -10,7 +10,7 @@ import Foundation
 
 class APIManager {
     
-    func loadData(urlString: String, completion: [XMovies] -> ()) {  // step 2 and step 7
+    func loadData(urlString: String, completion: [XMovie] -> ()) {  // step 2 and step 7
         
         // Get a non-cached session
         let config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
@@ -30,42 +30,35 @@ class APIManager {
                     
             } else {
                 
-                // Add JSONSerialization
-                do {
-                    /* .AllowFragments - top level object is not Array or Dictionary.
-                     Any type of string or value.
-                     NSJSONSerialization requires the Do / Try / Catch.
-                     Converts the NSDATA into a JSON object and casts it to a Dictionary. */
-                    
-                    // step 3
-                    if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? JSONDictionary,
-                                feed = json["feed"] as? JSONDictionary,
-                                entries = feed["entry"] as? JSONArray {
-                        
-                        var movies = [XMovies]()
-                        for (index, entry) in entries.enumerate() {
-                            let entry = XMovies(data: entry as! JSONDictionary)
-                            entry.mRank = index + 1
-                            movies.append(entry)
-                        }
-                        
-                        
-                        let i = movies.count
-                        print("iTunesApiManager - total count --> \(i)")  // step 5
-                        
-                        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT  // step 6
-                        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                            dispatch_async(dispatch_get_main_queue()) {
-                                completion(movies)
-                            }
-                        }
+                let videos = self.parseJson(data)
+                
+                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        completion(videos)
                     }
-                } catch {
-                     print("error in NSJSONSerialization")
                 }
-                // End of JSONSerialization
             }
         }
+        
         task.resume()  // starts the task - step 4
+    }
+    
+    func parseJson(data: NSData?) -> [XMovie] {
+        
+        do {
+            
+            if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as AnyObject? {
+                
+                return JsonDataExtractor.extractVideoDataFromJson(json)
+            }
+            
+        } catch {
+            
+            print("Failed to parse data: \(error)")
+            
+        }
+        
+        return [XMovie]()
     }
 }

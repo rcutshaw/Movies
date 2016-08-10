@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var movies = [XMovies]()  // created this array to hold all our fetched movies
+    var movies = [XMovie]()  // created this array to hold all our fetched movies
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -37,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             completion: didLoadData)  // when done, executes didLoadData  // step 2
     }
 
-    func didLoadData(movies: [XMovies]) {  // result from APIManager method is now the input to didLoadData - step 8
+    func didLoadData(movies: [XMovie]) {  // result from APIManager method is now the input to didLoadData - step 8
         
         print(reachabilityStatus)
         

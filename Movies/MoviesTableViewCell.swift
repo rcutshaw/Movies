@@ -10,7 +10,7 @@ import UIKit
 
 class MovieTableViewCell: UITableViewCell {
 
-    var movie: XMovies? {
+    var movie: XMovie? {
         didSet {
             updateCell()
         }
@@ -40,7 +40,7 @@ class MovieTableViewCell: UITableViewCell {
         }
     }
 
-    func GetMovieImage(movie: XMovies, imageView : UIImageView){
+    func GetMovieImage(movie: XMovie, imageView : UIImageView){
         
         // Background thread
         //  DISPATCH_QUEUE_PRIORITY_HIGH Items dispatched to the queue will run at high priority, i.e. the queue will be scheduled for execution before any default priority or low priority queue.
