@@ -69,7 +69,7 @@ class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
         
         title = ("The iTunes Top \(limit) Movies")
         
-        // Setup the Search Controller
+        //  Setup the Search Controller
         
         resultSearchController.searchResultsUpdater = self
         
