@@ -157,7 +157,7 @@ class MovieDetailVC: UIViewController {
         let activity2 = ("\(movies.mName) by \(movies.mArtist)")
         let activity3 = "Watch it and tell me what you think?"
         let activity4 = movies.mLinkToiTunes
-        let activity5 = "(Shared with the Movie App - Step It UP!)"
+        let activity5 = "(Shared from the Movie App - by Randy Cutshaw!)"
         
         let activityViewController : UIActivityViewController = UIActivityViewController(activityItems: [activity1, activity2, activity3, activity4,activity5], applicationActivities: nil)
         
@@ -208,6 +208,7 @@ class MovieDetailVC: UIViewController {
     deinit
     {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        print("MDVC deinit called")
     }
     
 }

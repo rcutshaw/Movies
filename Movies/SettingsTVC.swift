@@ -169,6 +169,7 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
     deinit
     {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        print("STVC deinit called")
     }
 
 }

@@ -187,6 +187,7 @@ class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "ReachStatusChanged", object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIContentSizeCategoryDidChangeNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "BestImageQualityChanged", object: nil)
+        print("MTVC deinit called")
     }
     
     // MARK: - Table view data source
@@ -299,9 +300,9 @@ class MovieTVC: UITableViewController/*, UISearchResultsUpdating*/ {
 // remove the func updateSearchResultsForSearchController from this file
 // Another way is to not put the extension in this file here, but create a separate file and put
 // all your extensions, including this one in that file.  Your choice!
-extension MovieTVC: UISearchResultsUpdating {
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        searchController.searchBar.text!.lowercaseString
-        filterSearch(searchController.searchBar.text!)
-    }
-}
+//extension MovieTVC: UISearchResultsUpdating {
+//    func updateSearchResultsForSearchController(searchController: UISearchController) {
+//        searchController.searchBar.text!.lowercaseString
+//        filterSearch(searchController.searchBar.text!)
+//    }
+//}

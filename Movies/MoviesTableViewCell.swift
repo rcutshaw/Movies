@@ -16,7 +16,7 @@ class MovieTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var movieImage: UIImageView!
+    @IBOutlet weak var movieImage: CustomImageView!
     
     @IBOutlet weak var rank: UILabel!
     
@@ -40,7 +40,7 @@ class MovieTableViewCell: UITableViewCell {
         }
     }
 
-    func GetMovieImage(movie: XMovie, imageView : UIImageView){
+    func GetMovieImage(movie: XMovie, imageView : CustomImageView){
         
         // Background thread
         //  DISPATCH_QUEUE_PRIORITY_HIGH Items dispatched to the queue will run at high priority, i.e. the queue will be scheduled for execution before any default priority or low priority queue.
@@ -49,21 +49,22 @@ class MovieTableViewCell: UITableViewCell {
         //
         //  DISPATCH_QUEUE_PRIORITY_LOW Items dispatched to the queue will run at low priority, i.e. the queue will be scheduled for execution after all default priority and high priority queues have been scheduled.
         
+        imageView.loadImageUsingUrlString(movie.mImageUrl, movie: movie)  // this takes place of dispatch.... code below
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            
-            let data = NSData(contentsOfURL: NSURL(string: movie.mImageUrl)!)
-            
-            var image : UIImage?
-            if data != nil {
-                movie.mImageData = data
-                image = UIImage(data: data!)
-            }
-            
-            // move back to Main Queue
-            dispatch_async(dispatch_get_main_queue()) {
-                imageView.image = image
-            }
-        }
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+//            
+//            let data = NSData(contentsOfURL: NSURL(string: movie.mImageUrl)!)
+//            
+//            var image : UIImage?
+//            if data != nil {
+//                movie.mImageData = data
+//                image = UIImage(data: data!)
+//            }
+//            
+//            // move back to Main Queue
+//            dispatch_async(dispatch_get_main_queue()) {
+//                imageView.image = image
+//            }
+//        }
     }
 }
